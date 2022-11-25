@@ -26,12 +26,11 @@ let rollTwo = true;
 let rollThree = true;
 let rollFour = true;
 let rollFive = true;
-let amountRolled = 3;
+let amountRolled = 100;
 let extremelyStupidOffset = 0;
+let ogExtremelyStupidOffset = 0;
 
 document.getElementById("trillTerning").addEventListener("click", fnc_trillTerning);
-
-console.log(document.getElementById("bigStraight"));
 
 document.getElementById("ones").addEventListener("click", fnc_ones);
 document.getElementById("twoes").addEventListener("click", fnc_twoes);
@@ -44,7 +43,7 @@ document.getElementById("2pairs").addEventListener("click", fnc_twoPairs);
 document.getElementById("3OfAKind").addEventListener("click", fnc_threeOfAKind);
 document.getElementById("4OfAKind").addEventListener("click", fnc_fourOfAKind);
 document.getElementById("smallStraight").addEventListener("click", fnc_smallStraight);
-//document.getElementById("bigStraight").addEventListener("click", fnc_bigStraight);
+document.getElementById("bigStraight").addEventListener("click", fnc_bigStraight);
 document.getElementById("house").addEventListener("click", fnc_house);
 document.getElementById("chance").addEventListener("click", fnc_chance);
 document.getElementById("Yatzy").addEventListener("click", fnc_yatzy);
@@ -159,12 +158,13 @@ function diceReset() {
 }
 
 function sumCalc() {
-    sum = aces + twoes + threes + fours + fives + sixes + extremelyStupidOffset;
+    sum = aces + twoes + threes + fours + fives + sixes + ogExtremelyStupidOffset;
     document.getElementById("sum").innerText = ("Sum: " + sum);
     if (sum >= 63) {
         bonus = 50;
         document.getElementById("bonus").innerText = ("Bonus: " + bonus);
     }
+    totalSumCalc()
 }
 
 function fnc_ones() {
@@ -190,7 +190,7 @@ function fnc_ones() {
         else {
             document.getElementById("ones").innerText = "Ones: -";
             aces = -1;
-            extremelyStupidOffset = extremelyStupidOffset + 1;
+            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
@@ -219,7 +219,7 @@ function fnc_twoes() {
         else {
             document.getElementById("twoes").innerText = "Twoes: -";
             twoes = -1;
-            extremelyStupidOffset = extremelyStupidOffset + 1;
+            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
@@ -248,7 +248,7 @@ function fnc_threes() {
         else {
             document.getElementById("threes").innerText = "Threes: -";
             threes = -1;
-            extremelyStupidOffset = extremelyStupidOffset + 1;
+            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
@@ -277,7 +277,7 @@ function fnc_fours() {
         else {
             document.getElementById("fours").innerText = "Fours: -";
             fours = -1;
-            extremelyStupidOffset = extremelyStupidOffset + 1;
+            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
@@ -306,7 +306,7 @@ function fnc_fives() {
         else {
             document.getElementById("fives").innerText = "Fives: -";
             fives = -1;
-            extremelyStupidOffset = extremelyStupidOffset + 1;
+            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
@@ -335,7 +335,7 @@ function fnc_sixes() {
         else {
             document.getElementById("sixes").innerText = "Sixes: -";
             sixes = -1;
-            extremelyStupidOffset = extremelyStupidOffset + 1;
+            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
@@ -373,6 +373,7 @@ function fnc_onePair() {
             extremelyStupidOffset = extremelyStupidOffset + 1;
         }
         diceReset()
+        totalSumCalc()
     }
 }
 function fnc_threeOfAKind() {
@@ -407,6 +408,7 @@ function fnc_threeOfAKind() {
             extremelyStupidOffset = extremelyStupidOffset + 1;
         }
         diceReset()
+        totalSumCalc()
     }
 }
 function fnc_twoPairs() {
@@ -414,7 +416,7 @@ function fnc_twoPairs() {
         if (terning1 == 6 && terning2 == 6 || terning1 == 6 && terning3 == 6 || terning1 == 6 && terning4 == 6 || terning1 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 || terning2 == 6 && terning4 == 6 || terning2 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 || terning3 == 6 && terning5 == 6 || terning4 == 6 && terning5 == 6) {
             if (terning1 == 5 && terning2 == 5 || terning1 == 5 && terning3 == 5 || terning1 == 5 && terning4 == 5 || terning1 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 || terning2 == 5 && terning4 == 5 || terning2 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 || terning3 == 5 && terning5 == 5 || terning4 == 5 && terning5 == 5) {
                 twoPairs = 22;
-                document.getElementById("2pairs").innerText = ("2 pair: 22");
+                document.getElementById("2pairs").innerText = ("2 pairs: 22");
             }
             else if (terning1 == 4 && terning2 == 4 || terning1 == 4 && terning3 == 4 || terning1 == 4 && terning4 == 4 || terning1 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 || terning2 == 4 && terning4 == 4 || terning2 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 || terning3 == 4 && terning5 == 4 || terning4 == 4 && terning5 == 4) {
                 twoPairs = 20;
@@ -487,9 +489,44 @@ function fnc_twoPairs() {
             extremelyStupidOffset = extremelyStupidOffset + 1;
         }
         diceReset()
+        totalSumCalc()
     }
 }
-function fnc_fourOfAKind() {}
+function fnc_fourOfAKind() {
+    if (fourOfAKind == 0) {
+        if (terning1 == 6 && terning2 == 6 && terning3 == 6 && terning4 == 6 || terning1 == 6 && terning2 == 6 && terning3 == 6 && terning5 == 6 || terning1 == 6 && terning2 == 6 && terning4 == 6 && terning5 == 6 || terning1 == 6 && terning3 == 6 && terning4 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 && terning4 == 6 && terning5 == 6) {
+            fourOfAKind = 24;
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: " + fourOfAKind)
+        }
+        else if (terning1 == 5 && terning2 == 5 && terning3 == 5 && terning4 == 5 || terning1 == 5 && terning2 == 5 && terning3 == 5 && terning5 == 5 || terning1 == 5 && terning2 == 5 && terning4 == 5 && terning5 == 5 || terning1 == 5 && terning3 == 5 && terning4 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 && terning4 == 5 && terning5 == 5) {
+            fourOfAKind = 20;
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: " + fourOfAKind)
+        }
+        else if (terning1 == 4 && terning2 == 4 && terning3 == 4 && terning4 == 4 || terning1 == 4 && terning2 == 4 && terning3 == 4 && terning5 == 4 || terning1 == 4 && terning2 == 4 && terning4 == 4 && terning5 == 4 || terning1 == 4 && terning3 == 4 && terning4 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 && terning4 == 4 && terning5 == 4) {
+            fourOfAKind = 16;
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: " + fourOfAKind)
+        }
+        else if (terning1 == 3 && terning2 == 3 && terning3 == 3 && terning4 == 3 || terning1 == 3 && terning2 == 3 && terning3 == 3 && terning5 == 3 || terning1 == 3 && terning2 == 3 && terning4 == 3 && terning5 == 3 || terning1 == 3 && terning3 == 3 && terning4 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 && terning4 == 3 && terning5 == 3) {
+            fourOfAKind = 12;
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: " + fourOfAKind)
+        }
+        else if (terning1 == 2 && terning2 == 2 && terning3 == 2 && terning4 == 2 || terning1 == 2 && terning2 == 2 && terning3 == 2 && terning5 == 2 || terning1 == 2 && terning2 == 2 && terning4 == 2 && terning5 == 2 || terning1 == 2 && terning3 == 2 && terning4 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 && terning4 == 2 && terning5 == 2) {
+            fourOfAKind = 8;
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: " + fourOfAKind)
+        }
+        else if (terning1 == 1 && terning2 == 1 && terning3 == 1 && terning4 == 1 || terning1 == 1 && terning2 == 1 && terning3 == 1 && terning5 == 1 || terning1 == 1 && terning2 == 1 && terning4 == 1 && terning5 == 1 || terning1 == 1 && terning3 == 1 && terning4 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 && terning4 == 1 && terning5 == 1) {
+            fourOfAKind = 4;
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: " + fourOfAKind)
+        }
+        else {
+            document.getElementById("4OfAKind").innerText = ("4 of a kind: -")
+            fourOfAKind = -1;
+            extremelyStupidOffset = extremelyStupidOffset + 1;
+        }
+        diceReset()
+        totalSumCalc()
+    }
+}
 function fnc_smallStraight() {
     if (smallStraight == 0) {
         if (terning1 == 1 || terning2 == 1 || terning3 == 1 || terning4 == 1 || terning5 == 1) {
@@ -509,6 +546,8 @@ function fnc_smallStraight() {
             smallStraight = -1;
             extremelyStupidOffset = extremelyStupidOffset + 1;
         }
+        diceReset()
+        totalSumCalc()
     }
 }
 function fnc_bigStraight() {
@@ -518,7 +557,7 @@ function fnc_bigStraight() {
                 if (terning1 == 4 || terning2 == 4 || terning3 == 4 || terning4 == 4 || terning5 == 4) {
                     if (terning1 == 5 || terning2 == 5 || terning3 == 5 || terning4 == 5 || terning5 == 5) {
                         if (terning1 == 6 || terning2 == 6 || terning3 == 6 || terning4 == 6 || terning5 == 6) {
-                            bigStraight = 15;
+                            bigStraight = 20;
                             document.getElementById("bigStraight").innerText = ("Big straight: " + bigStraight);
                         }
                     }
@@ -530,8 +569,176 @@ function fnc_bigStraight() {
             bigStraight = -1;
             extremelyStupidOffset = extremelyStupidOffset + 1;
         }
+        diceReset()
+        totalSumCalc()
     }
 }
-function fnc_house() {}
-function fnc_chance() {}
-function fnc_yatzy() {}
+function fnc_house() {
+    if (house == 0) {
+        if (terning1 == 6 && terning2 == 6 && terning3 == 6 || terning1 == 6 && terning2 == 6 && terning4 == 6 || terning1 == 6 && terning2 == 6 && terning5 == 6 || terning1 == 6 && terning3 == 6 && terning4 == 6 || terning1 == 6 && terning3 == 6 && terning5 == 6 || terning1 == 6 && terning4 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 && terning4 == 6 || terning2 == 6 && terning3 == 6 && terning5 == 6 || terning2 == 6 && terning4 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 && terning5 == 6) {
+            if (terning1 == 5 && terning2 == 5 || terning1 == 5 && terning3 == 5 || terning1 == 5 && terning4 == 5 || terning1 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 || terning2 == 5 && terning4 == 5 || terning2 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 || terning3 == 5 && terning5 == 5 || terning4 == 5 && terning5 == 5) {
+                house = 28;
+                document.getElementById("house").innerText = ("House: 28");
+            }
+            else if (terning1 == 4 && terning2 == 4 || terning1 == 4 && terning3 == 4 || terning1 == 4 && terning4 == 4 || terning1 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 || terning2 == 4 && terning4 == 4 || terning2 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 || terning3 == 4 && terning5 == 4 || terning4 == 4 && terning5 == 4) {
+                house = 26;
+                document.getElementById("house").innerText = ("House: 26");
+            }
+            else if (terning1 == 3 && terning2 == 3 || terning1 == 3 && terning3 == 3 || terning1 == 3 && terning4 == 3 || terning1 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 || terning2 == 3 && terning4 == 3 || terning2 == 3 && terning5 == 3 || terning3 == 3 && terning4 == 3 || terning3 == 3 && terning5 == 3 || terning4 == 3 && terning5 == 3) {
+                house = 24;
+                document.getElementById("house").innerText = ("House: 24");
+            }
+            else if (terning1 == 2 && terning2 == 2 || terning1 == 2 && terning3 == 2 || terning1 == 2 && terning4 == 2 || terning1 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 || terning2 == 2 && terning4 == 2 || terning2 == 2 && terning5 == 2 || terning3 == 2 && terning4 == 2 || terning3 == 2 && terning5 == 2 || terning4 == 2 && terning5 == 2) {
+                house = 22;
+                document.getElementById("house").innerText = ("House: 22");
+            }
+            else if (terning1 == 1 && terning2 == 1 || terning1 == 1 && terning3 == 1 || terning1 == 1 && terning4 == 1 || terning1 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 || terning2 == 1 && terning4 == 1 || terning2 == 1 && terning5 == 1 || terning3 == 1 && terning4 == 1 || terning3 == 1 && terning5 == 1 || terning4 == 1 && terning5 == 1) {
+                house = 20;
+                document.getElementById("house").innerText = ("House: 20");
+            }
+        }
+        else if (terning1 == 5 && terning2 == 5 && terning3 == 5 || terning1 == 5 && terning2 == 5 && terning4 == 5 || terning1 == 5 && terning2 == 5 && terning5 == 5 || terning1 == 5 && terning3 == 5 && terning4 == 5 || terning1 == 5 && terning3 == 5 && terning5 == 5 || terning1 == 5 && terning4 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 && terning4 == 5 || terning2 == 5 && terning3 == 5 && terning5 == 5 || terning2 == 5 && terning4 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 && terning5 == 5) {
+            if (terning1 == 6 && terning2 == 6 || terning1 == 6 && terning3 == 6 || terning1 == 6 && terning4 == 6 || terning1 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 || terning2 == 6 && terning4 == 6 || terning2 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 || terning3 == 6 && terning5 == 6 || terning4 == 6 && terning5 == 6) {
+                house = 27;
+                document.getElementById("house").innerText = ("House: 27");
+            }
+            else if (terning1 == 4 && terning2 == 4 || terning1 == 4 && terning3 == 4 || terning1 == 4 && terning4 == 4 || terning1 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 || terning2 == 4 && terning4 == 4 || terning2 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 || terning3 == 4 && terning5 == 4 || terning4 == 4 && terning5 == 4) {
+                house = 23;
+                document.getElementById("house").innerText = ("House: 23");
+            }
+            else if (terning1 == 3 && terning2 == 3 || terning1 == 3 && terning3 == 3 || terning1 == 3 && terning4 == 3 || terning1 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 || terning2 == 3 && terning4 == 3 || terning2 == 3 && terning5 == 3 || terning3 == 3 && terning4 == 3 || terning3 == 3 && terning5 == 3 || terning4 == 3 && terning5 == 3) {
+                house = 21;
+                document.getElementById("house").innerText = ("House: 21");
+            }
+            else if (terning1 == 2 && terning2 == 2 || terning1 == 2 && terning3 == 2 || terning1 == 2 && terning4 == 2 || terning1 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 || terning2 == 2 && terning4 == 2 || terning2 == 2 && terning5 == 2 || terning3 == 2 && terning4 == 2 || terning3 == 2 && terning5 == 2 || terning4 == 2 && terning5 == 2) {
+                house = 19;
+                document.getElementById("house").innerText = ("House: 19");
+            }
+            else if (terning1 == 1 && terning2 == 1 || terning1 == 1 && terning3 == 1 || terning1 == 1 && terning4 == 1 || terning1 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 || terning2 == 1 && terning4 == 1 || terning2 == 1 && terning5 == 1 || terning3 == 1 && terning4 == 1 || terning3 == 1 && terning5 == 1 || terning4 == 1 && terning5 == 1) {
+                house = 17;
+                document.getElementById("house").innerText = ("House: 17");
+            }
+        }
+        else if (terning1 == 4 && terning2 == 4 && terning3 == 4 || terning1 == 4 && terning2 == 4 && terning4 == 4 || terning1 == 4 && terning2 == 4 && terning5 == 4 || terning1 == 4 && terning3 == 4 && terning4 == 4 || terning1 == 4 && terning3 == 4 && terning5 == 4 || terning1 == 4 && terning4 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 && terning4 == 4 || terning2 == 4 && terning3 == 4 && terning5 == 4 || terning2 == 4 && terning4 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 && terning5 == 4) {
+            if (terning1 == 5 && terning2 == 5 || terning1 == 5 && terning3 == 5 || terning1 == 5 && terning4 == 5 || terning1 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 || terning2 == 5 && terning4 == 5 || terning2 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 || terning3 == 5 && terning5 == 5 || terning4 == 5 && terning5 == 5) {
+                house = 22;
+                document.getElementById("house").innerText = ("House: 22");
+            }
+            else if (terning1 == 6 && terning2 == 6 || terning1 == 6 && terning3 == 6 || terning1 == 6 && terning4 == 6 || terning1 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 || terning2 == 6 && terning4 == 6 || terning2 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 || terning3 == 6 && terning5 == 6 || terning4 == 6 && terning5 == 6) {
+                house = 24;
+                document.getElementById("house").innerText = ("House: 24");
+            }
+            else if (terning1 == 3 && terning2 == 3 || terning1 == 3 && terning3 == 3 || terning1 == 3 && terning4 == 3 || terning1 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 || terning2 == 3 && terning4 == 3 || terning2 == 3 && terning5 == 3 || terning3 == 3 && terning4 == 3 || terning3 == 3 && terning5 == 3 || terning4 == 3 && terning5 == 3) {
+                house = 18;
+                document.getElementById("house").innerText = ("House: 18");
+            }
+            else if (terning1 == 2 && terning2 == 2 || terning1 == 2 && terning3 == 2 || terning1 == 2 && terning4 == 2 || terning1 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 || terning2 == 2 && terning4 == 2 || terning2 == 2 && terning5 == 2 || terning3 == 2 && terning4 == 2 || terning3 == 2 && terning5 == 2 || terning4 == 2 && terning5 == 2) {
+                house = 16;
+                document.getElementById("house").innerText = ("House: 16");
+            }
+            else if (terning1 == 1 && terning2 == 1 || terning1 == 1 && terning3 == 1 || terning1 == 1 && terning4 == 1 || terning1 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 || terning2 == 1 && terning4 == 1 || terning2 == 1 && terning5 == 1 || terning3 == 1 && terning4 == 1 || terning3 == 1 && terning5 == 1 || terning4 == 1 && terning5 == 1) {
+                house = 14;
+                document.getElementById("house").innerText = ("House: 14");
+            }
+        }
+        else if (terning1 == 3 && terning2 == 3 && terning3 == 3 || terning1 == 3 && terning2 == 3 && terning4 == 3 || terning1 == 3 && terning2 == 3 && terning5 == 3 || terning1 == 3 && terning3 == 3 && terning4 == 3 || terning1 == 3 && terning3 == 3 && terning5 == 3 || terning1 == 3 && terning4 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 && terning4 == 3 || terning2 == 3 && terning3 == 3 && terning5 == 3 || terning2 == 3 && terning4 == 3 && terning5 == 3 || terning3 == 3 && terning4 == 3 && terning5 == 3) {
+            if (terning1 == 5 && terning2 == 5 || terning1 == 5 && terning3 == 5 || terning1 == 5 && terning4 == 5 || terning1 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 || terning2 == 5 && terning4 == 5 || terning2 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 || terning3 == 5 && terning5 == 5 || terning4 == 5 && terning5 == 5) {
+                house = 19;
+                document.getElementById("house").innerText = ("House: 19");
+            }
+            else if (terning1 == 4 && terning2 == 4 || terning1 == 4 && terning3 == 4 || terning1 == 4 && terning4 == 4 || terning1 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 || terning2 == 4 && terning4 == 4 || terning2 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 || terning3 == 4 && terning5 == 4 || terning4 == 4 && terning5 == 4) {
+                house = 17;
+                document.getElementById("house").innerText = ("House: 17");
+            }
+            else if (terning1 == 6 && terning2 == 6 || terning1 == 6 && terning3 == 6 || terning1 == 6 && terning4 == 6 || terning1 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 || terning2 == 6 && terning4 == 6 || terning2 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 || terning3 == 6 && terning5 == 6 || terning4 == 6 && terning5 == 6) {
+                house = 21;
+                document.getElementById("house").innerText = ("House: 21");
+            }
+            else if (terning1 == 2 && terning2 == 2 || terning1 == 2 && terning3 == 2 || terning1 == 2 && terning4 == 2 || terning1 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 || terning2 == 2 && terning4 == 2 || terning2 == 2 && terning5 == 2 || terning3 == 2 && terning4 == 2 || terning3 == 2 && terning5 == 2 || terning4 == 2 && terning5 == 2) {
+                house = 13;
+                document.getElementById("house").innerText = ("House: 13");
+            }
+            else if (terning1 == 1 && terning2 == 1 || terning1 == 1 && terning3 == 1 || terning1 == 1 && terning4 == 1 || terning1 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 || terning2 == 1 && terning4 == 1 || terning2 == 1 && terning5 == 1 || terning3 == 1 && terning4 == 1 || terning3 == 1 && terning5 == 1 || terning4 == 1 && terning5 == 1) {
+                house = 11;
+                document.getElementById("house").innerText = ("House: 11");
+            }
+        }
+        else if (terning1 == 2 && terning2 == 2 && terning3 == 2 || terning1 == 2 && terning2 == 2 && terning4 == 2 || terning1 == 2 && terning2 == 2 && terning5 == 2 || terning1 == 2 && terning3 == 2 && terning4 == 2 || terning1 == 2 && terning3 == 2 && terning5 == 2 || terning1 == 2 && terning4 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 && terning4 == 2 || terning2 == 2 && terning3 == 2 && terning5 == 2 || terning2 == 2 && terning4 == 2 && terning5 == 2 || terning3 == 2 && terning4 == 2 && terning5 == 2) {
+            if (terning1 == 5 && terning2 == 5 || terning1 == 5 && terning3 == 5 || terning1 == 5 && terning4 == 5 || terning1 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 || terning2 == 5 && terning4 == 5 || terning2 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 || terning3 == 5 && terning5 == 5 || terning4 == 5 && terning5 == 5) {
+                house = 16;
+                document.getElementById("house").innerText = ("House: 16");
+            }
+            else if (terning1 == 4 && terning2 == 4 || terning1 == 4 && terning3 == 4 || terning1 == 4 && terning4 == 4 || terning1 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 || terning2 == 4 && terning4 == 4 || terning2 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 || terning3 == 4 && terning5 == 4 || terning4 == 4 && terning5 == 4) {
+                house = 14;
+                document.getElementById("house").innerText = ("House: 14");
+            }
+            else if (terning1 == 3 && terning2 == 3 || terning1 == 3 && terning3 == 3 || terning1 == 3 && terning4 == 3 || terning1 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 || terning2 == 3 && terning4 == 3 || terning2 == 3 && terning5 == 3 || terning3 == 3 && terning4 == 3 || terning3 == 3 && terning5 == 3 || terning4 == 3 && terning5 == 3) {
+                house = 12;
+                document.getElementById("house").innerText = ("House: 12");
+            }
+            else if (terning1 == 6 && terning2 == 6 || terning1 == 6 && terning3 == 6 || terning1 == 6 && terning4 == 6 || terning1 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 || terning2 == 6 && terning4 == 6 || terning2 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 || terning3 == 6 && terning5 == 6 || terning4 == 6 && terning5 == 6) {
+                house = 18;
+                document.getElementById("house").innerText = ("House: 18");
+            }
+            else if (terning1 == 1 && terning2 == 1 || terning1 == 1 && terning3 == 1 || terning1 == 1 && terning4 == 1 || terning1 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 || terning2 == 1 && terning4 == 1 || terning2 == 1 && terning5 == 1 || terning3 == 1 && terning4 == 1 || terning3 == 1 && terning5 == 1 || terning4 == 1 && terning5 == 1) {
+                house = 8;
+                document.getElementById("house").innerText = ("House: 8");
+            }
+        }
+        else if (terning1 == 1 && terning2 == 1 && terning3 == 1 || terning1 == 1 && terning2 == 1 && terning4 == 1 || terning1 == 1 && terning2 == 1 && terning5 == 1 || terning1 == 1 && terning3 == 1 && terning4 == 1 || terning1 == 1 && terning3 == 1 && terning5 == 1 || terning1 == 1 && terning4 == 1 && terning5 == 1 || terning2 == 1 && terning3 == 1 && terning4 == 1 || terning2 == 1 && terning3 == 1 && terning5 == 1 || terning2 == 1 && terning4 == 1 && terning5 == 1 || terning3 == 1 && terning4 == 1 && terning5 == 1) {
+            if (terning1 == 5 && terning2 == 5 || terning1 == 5 && terning3 == 5 || terning1 == 5 && terning4 == 5 || terning1 == 5 && terning5 == 5 || terning2 == 5 && terning3 == 5 || terning2 == 5 && terning4 == 5 || terning2 == 5 && terning5 == 5 || terning3 == 5 && terning4 == 5 || terning3 == 5 && terning5 == 5 || terning4 == 5 && terning5 == 5) {
+                house = 13;
+                document.getElementById("house").innerText = ("House: 13");
+            }
+            else if (terning1 == 4 && terning2 == 4 || terning1 == 4 && terning3 == 4 || terning1 == 4 && terning4 == 4 || terning1 == 4 && terning5 == 4 || terning2 == 4 && terning3 == 4 || terning2 == 4 && terning4 == 4 || terning2 == 4 && terning5 == 4 || terning3 == 4 && terning4 == 4 || terning3 == 4 && terning5 == 4 || terning4 == 4 && terning5 == 4) {
+                house = 11;
+                document.getElementById("house").innerText = ("House: 11");
+            }
+            else if (terning1 == 3 && terning2 == 3 || terning1 == 3 && terning3 == 3 || terning1 == 3 && terning4 == 3 || terning1 == 3 && terning5 == 3 || terning2 == 3 && terning3 == 3 || terning2 == 3 && terning4 == 3 || terning2 == 3 && terning5 == 3 || terning3 == 3 && terning4 == 3 || terning3 == 3 && terning5 == 3 || terning4 == 3 && terning5 == 3) {
+                house = 9;
+                document.getElementById("house").innerText = ("House: 9");
+            }
+            else if (terning1 == 2 && terning2 == 2 || terning1 == 2 && terning3 == 2 || terning1 == 2 && terning4 == 2 || terning1 == 2 && terning5 == 2 || terning2 == 2 && terning3 == 2 || terning2 == 2 && terning4 == 2 || terning2 == 2 && terning5 == 2 || terning3 == 2 && terning4 == 2 || terning3 == 2 && terning5 == 2 || terning4 == 2 && terning5 == 2) {
+                house = 7;
+                document.getElementById("house").innerText = ("House: 7");
+            }
+            else if (terning1 == 6 && terning2 == 6 || terning1 == 6 && terning3 == 6 || terning1 == 6 && terning4 == 6 || terning1 == 6 && terning5 == 6 || terning2 == 6 && terning3 == 6 || terning2 == 6 && terning4 == 6 || terning2 == 6 && terning5 == 6 || terning3 == 6 && terning4 == 6 || terning3 == 6 && terning5 == 6 || terning4 == 6 && terning5 == 6) {
+                house = 15;
+                document.getElementById("house").innerText = ("House: 15");
+            }
+        }
+        else {
+            document.getElementById("house").innerText = ("House: -")
+            house = -1;
+            extremelyStupidOffset = extremelyStupidOffset + 1;
+        }
+        diceReset()
+        totalSumCalc()
+    }
+}
+function fnc_chance() {
+    chance = terning1 + terning2 + terning3 + terning4 + terning5;
+    document.getElementById("chance").innerText = ("Chance: " + chance)
+    diceReset()
+    totalSumCalc()
+}
+function fnc_yatzy() {
+    if (yatzy == 0 && terning1 == terning2 && terning1 == terning3 && terning1 == terning3 && terning1 == terning4 && terning1 == terning5) {
+        yatzy = terning1 * 5;
+        document.getElementById("Yatzy").innerText = ("Yatzy: " + yatzy);
+        diceReset()
+    }
+    else if (yatzy == 0) {
+        document.getElementById("Yatzy").innerText = ("Yatzy: -")
+        yatzy = -1;
+        extremelyStupidOffset = extremelyStupidOffset + 1;
+        diceReset()
+    }
+    totalSumCalc()
+
+}
+
+function totalSumCalc() {
+    totalSum = sum + onePair + twoPairs + threeOfAKind + fourOfAKind + house + bonus + smallStraight + bigStraight + yatzy + chance;
+    document.getElementById("totalSum").innerText = ("Total sum: " + totalSum);
+}
