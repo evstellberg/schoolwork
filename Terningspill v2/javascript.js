@@ -31,6 +31,8 @@ let extremelyStupidOffset = 0;
 let ogExtremelyStupidOffset = 0;
 let highscore = 0;
 
+
+
 document.getElementById("trillTerning").addEventListener("click", fnc_trillTerning);
 
 document.getElementById("ones").addEventListener("click", fnc_ones);
@@ -139,6 +141,16 @@ function fnc_trillTerning() {
     }
 }
 
+function count() {
+    const terninger = [terning1, terning2, terning3, terning4, terning5];
+    const count = {};
+    for (const num of terninger) {
+        count[num] = count[num] ? count[num] + 1 : 1;
+    }
+    console.log(count);
+        
+}
+
 function diceReset() {
     terning1 = 0;
     terning2 = 0;
@@ -175,29 +187,12 @@ function sumCalc() {
 }
 
 function fnc_ones() {
+    count()
+    console.log(count[1]);
     if (aces == 0) {
-        if (terning1 == 1 || terning2 == 1 || terning3 == 1 || terning4 == 1 || terning5 == 1) {
-            if (terning1 == 1) {
-                aces = aces + 1;
-            }
-            if (terning2 == 1) {
-                aces = aces + 1;
-            }
-            if (terning3 == 1) {
-                aces = aces + 1;
-            }
-            if (terning4 == 1) {
-                aces = aces + 1;
-            }
-            if (terning5 == 1) {
-                aces = aces + 1;
-            }
+        aces = parseInt(count[1]);
+        if (aces > 0) {
             document.getElementById("ones").innerText = ("Ones: " + aces);
-        }
-        else {
-            document.getElementById("ones").innerText = "Ones: -";
-            aces = -1;
-            extremelyStupidOffset = ogExtremelyStupidOffset + 1;
         }
         diceReset()
         sumCalc()
